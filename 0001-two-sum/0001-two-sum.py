@@ -9,6 +9,8 @@ class Solution:
             if(sum==target):
                 out.append(nums.index(y[l]))
                 out.append(len(nums)-1-(nums[::-1].index(y[r])))
+                # SPACE COMPLEXITY OF ABOVE LINE IS O(N)
+                # TIME COMPLEXITY OF ABOVE LINE IS O(N)(FOR INEX OPERATION) +O(N) (FOR REVERSED COPY CREATION)
                 l+=1
                 r-=1
                 
