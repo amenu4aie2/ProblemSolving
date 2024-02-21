@@ -11,15 +11,12 @@ class Solution:
         if not root:
             return []
         d.append([root])
-        d.append([None])
         t = []
         v = 0
-        while len(d)>1:
+        while len(d)>0:
             a = d.popleft()
             n = []
             y = []
-            # print(d)
-            # print(len(d))
             for i in a:
                 if i:
                     if i.left !=None:
@@ -28,7 +25,6 @@ class Solution:
                     y.append(i.val)
             if n:d.append(n)
             if y:t.append(y)
-            if n:d.append([None])
         print(t)
         return t
         
