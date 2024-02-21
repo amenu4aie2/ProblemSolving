@@ -7,41 +7,28 @@
 from collections import deque
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        def rec(root,q,i,array1,height=0):
-            if(len(q)>0):
-                a=q.popleft()
-                if(a):
-                    if(a.left):
-                        q.append(a.left)
-                        if(height==i):
-                            array1.append(a.left.val)
-                        array1=rec(a.left,q,i,array1,height+1)
-                    if(a.right):
-                        q.append(a.right)
-                        if(height==i):
-                            array1.append(a.right.val)
-                        array1=rec(a.right,q,i,array1,height+1)
-                    return array1
-                    
-                return array1
-            
-        def get_height(root,height):
-            if root:
-                height=max(get_height(root.right,height+1),get_height(root.left,height+1))
-            
-            return height
-
-        h=get_height(root,0)
-        print(h)
-        b=None
-        if(root):
-            q=deque([root])
-            # print(q)
-            b=[[root.val]]
-            for i in range(h+2):
-                q=deque([root])
-                array1=rec(root,q,i,[])
-                # print(array1)
-                if(array1):
-                    b.append(array1.copy())
-        return b
+        d = deque()
+        if not root:
+            return []
+        d.append([root])
+        d.append([None])
+        t = []
+        v = 0
+        while len(d)>1:
+            a = d.popleft()
+            n = []
+            y = []
+            # print(d)
+            # print(len(d))
+            for i in a:
+                if i:
+                    if i.left !=None:
+                        n.append(i.left)
+                    if i.right!=None:n.append(i.right)
+                    y.append(i.val)
+            if n:d.append(n)
+            if y:t.append(y)
+            if n:d.append([None])
+        print(t)
+        return t
+        
