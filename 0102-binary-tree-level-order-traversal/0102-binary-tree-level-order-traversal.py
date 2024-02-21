@@ -7,46 +7,41 @@
 from collections import deque
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        def levelo(q,array1,i,height=0):
-
+        def rec(root,q,i,array1,height=0):
             if(len(q)>0):
-
                 a=q.popleft()
-                
-                if a:
-                    
+                if(a):
                     if(a.left):
+                        q.append(a.left)
                         if(height==i):
                             array1.append(a.left.val)
-                        q.append(a.left)
-                        array1=levelo(q,array1,i,height+1)
-                        
+                        array1=rec(a.left,q,i,array1,height+1)
                     if(a.right):
+                        q.append(a.right)
                         if(height==i):
                             array1.append(a.right.val)
-                        q.append(a.right)
-                        array1=levelo(q,array1,i,height+1)
-                        
-                    
+                        array1=rec(a.right,q,i,array1,height+1)
                     return array1
+                    
                 return array1
-        def get_height(root,height=0):
+            
+        def get_height(root,height):
             if root:
-                if root.left is not None or root.right is not None:
-                    return max(get_height(root.left,height+1),get_height(root.right,height+1))
-                return height
+                height=max(get_height(root.right,height+1),get_height(root.left,height+1))
+            
             return height
+
+        h=get_height(root,0)
+        print(h)
+        b=None
         if(root):
             q=deque([root])
-            h=get_height(root)
+            # print(q)
             b=[[root.val]]
-            print(h)
-            for i in range(h):
+            for i in range(h+2):
                 q=deque([root])
-                array1=levelo(q,[],i)
-                if(len(array1)>0):
+                array1=rec(root,q,i,[])
+                # print(array1)
+                if(array1):
                     b.append(array1.copy())
-            
-            
-            # 
-            return b
+        return b
