@@ -10,4 +10,8 @@ class Solution:
             else:
                 r=mid-1
             mid = (l+r)//2
+        if(mid<0 ):
+            return 0
+        if(mid==len(nums)):
+           return len(nums)
         return (mid)+1 if nums[mid]<target else mid
